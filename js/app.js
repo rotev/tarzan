@@ -3,6 +3,10 @@ var partsLoopTime = 1000,
 
 var clickData = {
   "1": {
+    "stoneCSS": {
+      "left": "1409px",
+      "top": "175px"
+    },
     "changeCSS": {
       "2": {
         "left": "1409px",
@@ -24,6 +28,10 @@ var clickData = {
   },
 
   "2": {
+    "stoneCSS": {
+      "left": "587px",
+      "top": "16px" 
+    },
     "changeCSS": {
       "1": {
         "left": "587px",
@@ -45,6 +53,10 @@ var clickData = {
   },
 
   "3": {
+    "stoneCSS": {
+      "left": "224px",
+      "top": "100px" 
+    },
     "changeCSS": {
       "1": {
         "left": "224px",
@@ -66,6 +78,10 @@ var clickData = {
   },
 
   "4": {
+    "stoneCSS": {
+      "left": "538px",
+      "top": "252px" 
+    },
     "changeCSS": {
       "1": {
         "left": "538px",
@@ -87,6 +103,10 @@ var clickData = {
   },
 
   "5": {
+    "stoneCSS": {
+      "left": "1174px",
+      "top": "354px"
+    },
     "changeCSS": {
       "1": {
         "left": "1342px",
@@ -108,12 +128,16 @@ var clickData = {
   }
 };
 
-var $body;
+var $body,
+    $stone;
 
 
 $(document).ready(function() {
 
   $body = $('body');
+  $stone = $('#stone');
+
+  $stone.click(partStone).hide();
 
   $body.addClass('animate');
 
@@ -132,6 +156,43 @@ function clearTimeouts() {
   }
 }
 
+function hideParts() {
+  for (var i = 0; i <= 5; i++) {
+    $('#part-' + i).css({visibility: "hidden"});
+  }
+}
+
+function showStone(i) {
+  var css = clickData[i].stoneCSS;
+
+  if (css) {
+    $stone.css(css);
+    $stone.show();
+  }
+}
+
+function hideStone() {
+  $stone.hide();
+}
+
+function partStone(e) {
+  if (e) {
+    e.preventDefault();
+  }
+
+  $('.magnet').removeClass('magnet');
+  $body.addClass('animate');
+  $body.removeClass('remove-animation');
+
+  for (var i = 1; i <= 5; i++) {
+    $("#part-" + i).css({left: "", top: "", visibility: "visible"});
+  }
+
+  hideStone();
+
+  return false;
+}
+
 function onPartClick(e) {
   e.preventDefault();
 
@@ -139,28 +200,28 @@ function onPartClick(e) {
 
   var $part = $(this);
 
-  //if ($part.hasClass('magnet')) {
   if ($('.magnet').length > 0) {
-    //$part.removeClass('magnet');
-    $('.magnet').removeClass('magnet');
-    $body.addClass('animate');
-    $body.removeClass('remove-animation');
-
-    for (var i = 1; i <= 5; i++) {
-      $("#part-" + i).css({left: "", top: ""});
-    }
+    partStone();
   } else {
     $part.addClass('magnet');
 
-    animTimeouts.push(setTimeout(function() {
-      $body.removeClass('animate');
-      animTimeouts.push(setTimeout(function() {
-        $body.addClass('remove-animation');
-      }, partsLoopTime/4));
-    }, partsMoveTime*2/3));
-
     var i = $(this).attr("id").replace("part-", "");
     var changeCSS = clickData[i].changeCSS;
+
+    animTimeouts.push(setTimeout(function() {
+      $body.removeClass('animate');
+
+      animTimeouts.push(setTimeout(function() {
+
+        $body.addClass('remove-animation');
+        animTimeouts.push(setTimeout(function() {
+          showStone(i);
+          hideParts();
+        }, partsLoopTime/4));
+
+      }, partsLoopTime/4));
+
+    }, partsMoveTime - partsLoopTime));
 
     var $otherPart;
     for (var otherPart in changeCSS) {

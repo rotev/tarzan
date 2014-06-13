@@ -14,7 +14,9 @@
   background: url(../img/parts/Part1_State1.png);
   background-size: contain;
   background-repeat: no-repeat;
-  transition: all 2s ease;
+  transition-property: left, top;
+  transition-duration: 2s;
+  transition-timing-function: ease;
   -webkit-animation: part-1-keyframes 1s linear infinite;
   -webkit-animation-play-state: paused; }
 
@@ -58,7 +60,9 @@
   background: url(../img/parts/Part2_State1.png);
   background-size: contain;
   background-repeat: no-repeat;
-  transition: all 2s ease;
+  transition-property: left, top;
+  transition-duration: 2s;
+  transition-timing-function: ease;
   -webkit-animation: part-2-keyframes 1s linear infinite;
   -webkit-animation-play-state: paused; }
 
@@ -102,7 +106,9 @@
   background: url(../img/parts/Part3_State1.png);
   background-size: contain;
   background-repeat: no-repeat;
-  transition: all 2s ease;
+  transition-property: left, top;
+  transition-duration: 2s;
+  transition-timing-function: ease;
   -webkit-animation: part-3-keyframes 1s linear infinite;
   -webkit-animation-play-state: paused; }
 
@@ -146,7 +152,9 @@
   background: url(../img/parts/Part4_State1.png);
   background-size: contain;
   background-repeat: no-repeat;
-  transition: all 2s ease;
+  transition-property: left, top;
+  transition-duration: 2s;
+  transition-timing-function: ease;
   -webkit-animation: part-4-keyframes 1s linear infinite;
   -webkit-animation-play-state: paused; }
 
@@ -190,7 +198,9 @@
   background: url(../img/parts/Part5_State1.png);
   background-size: contain;
   background-repeat: no-repeat;
-  transition: all 2s ease;
+  transition-property: left, top;
+  transition-duration: 2s;
+  transition-timing-function: ease;
   -webkit-animation: part-5-keyframes 1s linear infinite;
   -webkit-animation-play-state: paused; }
 
@@ -224,6 +234,45 @@
 
   100% {
     background-image: url("../img/parts/Part5_State4.png"); } }
+#stone {
+  width: 718px;
+  height: 1019px;
+  display: inline-block;
+  position: absolute;
+  left: 602px;
+  top: 42px;
+  background: url(../img/stone/Stone1_big.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  -webkit-animation: stone-keyframes 1s linear infinite; }
+  #stone.zoom-out {
+    width: 420.03px;
+    height: 596.115px; }
+
+@-webkit-keyframes stone-keyframes {
+  0% {
+    background-image: url("../img/stone/Stone1_big.png"); }
+
+  25% {
+    background-image: url("../img/stone/Stone1_big.png"); }
+
+  25.01% {
+    background-image: url("../img/stone/Stone2_big.png"); }
+
+  50% {
+    background-image: url("../img/stone/Stone2_big.png"); }
+
+  50.01% {
+    background-image: url("../img/stone/Stone3_big.png"); }
+
+  75% {
+    background-image: url("../img/stone/Stone3_big.png"); }
+
+  75.01% {
+    background-image: url("../img/stone/Stone4_big.png"); }
+
+  100% {
+    background-image: url("../img/stone/Stone4_big.png"); } }
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
   PAGE
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */

@@ -19,10 +19,18 @@ $parts-pos: (
       );
 
 $parts-loop-time: 1; // without s
+$stone-loop-time: $parts-loop-time;
 $parts-move-time: 2s; // with s
 
 $scene-width: 1920px;
 $scene-height: 1080px;
+
+$stone-width: 718px;
+$stone-height: 1019px;
+$stone-left: 602px;
+$stone-top: 42px;
+
+$zoom-ratio: 0.585;
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
   PARTS
@@ -40,7 +48,10 @@ $scene-height: 1080px;
   background-size: contain;
   background-repeat: no-repeat;
 
-  transition: all $parts-move-time ease;
+  //transition: all $parts-move-time ease;
+  transition-property: left, top;
+  transition-duration: $parts-move-time;
+  transition-timing-function: ease;
 }
 
 @for $i from 1 through 5 {
@@ -85,6 +96,43 @@ $scene-height: 1080px;
     100%      { background-image: url($state4-url); }
   }  
 }
+
+#stone {
+  width: $stone-width;
+  height: $stone-height;
+  display: inline-block;
+
+  position: absolute;
+  left: $stone-left;
+  top: $stone-top;
+
+  background: url(../img/stone/Stone1_big.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+
+  -webkit-animation: stone-keyframes #{$stone-loop-time}s linear infinite;
+
+  &.zoom-out {
+    width: $stone-width * $zoom-ratio;
+    height: $stone-height * $zoom-ratio;    
+  }
+}
+
+$stone-state1-url: "../img/stone/Stone1_big.png";
+$stone-state2-url: "../img/stone/Stone2_big.png";
+$stone-state3-url: "../img/stone/Stone3_big.png";
+$stone-state4-url: "../img/stone/Stone4_big.png";
+
+@-webkit-keyframes stone-keyframes {
+  0%        { background-image: url($stone-state1-url); }
+  25%       { background-image: url($stone-state1-url); }
+  25.01%    { background-image: url($stone-state2-url); }
+  50%       { background-image: url($stone-state2-url); }
+  50.01%    { background-image: url($stone-state3-url); }
+  75%       { background-image: url($stone-state3-url); }
+  75.01%    { background-image: url($stone-state4-url); }
+  100%      { background-image: url($stone-state4-url); }
+}  
 
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 

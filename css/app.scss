@@ -1,0 +1,117 @@
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+  SETTINGS
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+$parts-sizes: ( 
+        (243px, 307px), 
+        (233px, 263px),
+        (153px, 145px),
+        (337px, 300px),
+        (173px, 185px)
+      );
+
+$parts-pos: (
+        (1550px, 91px),
+        (445px, 98px),
+        (92px, 357px),
+        (433px, 550px),
+        (1420px, 590px)
+      );
+
+$parts-loop-time: 1.5; // without s
+$parts-move-time: 0.5s; // with s
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+  PARTS
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+@mixin part($name, $width, $height, $left, $top) {
+  width: $width;
+  height: $height;
+  display: inline-block;
+
+  position: absolute;
+  left: $left;
+  top: $top;
+
+  background: url(../img/parts/Part#{$name}_State1.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+
+  transition: all $parts-move-time ease;
+}
+
+@for $i from 1 through 5 {
+  #part-#{$i} {
+    $size: nth($parts-sizes, $i);
+    $width: nth($size, 1);
+    $height: nth($size, 2);
+
+    $pos: nth($parts-pos, $i);
+    $x: nth($pos, 1);
+    $y: nth($pos, 2);
+
+    @include part($i, $width, $height, $x, $y);
+  }
+
+  .animate #part-#{$i} {
+    -webkit-animation: part-#{$i}-keyframes #{$parts-loop-time}s linear infinite;
+    //-webkit-animation-delay: #{$i*$parts-loop-time/10}s;
+  }
+
+  $state1-url: "../img/parts/Part#{$i}_State1.png";
+  $state2-url: "../img/parts/Part#{$i}_State2.png";
+  $state3-url: "../img/parts/Part#{$i}_State3.png";
+  $state4-url: "../img/parts/Part#{$i}_State4.png";
+
+  @-webkit-keyframes part-#{$i}-keyframes {
+    0%        { background-image: url($state1-url); }
+    25%       { background-image: url($state1-url); }
+    25.01%    { background-image: url($state2-url); }
+    50%       { background-image: url($state2-url); }
+    50.01%    { background-image: url($state3-url); }
+    75%       { background-image: url($state3-url); }
+    75.01%    { background-image: url($state4-url); }
+    100%      { background-image: url($state4-url); }
+  }  
+}
+
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+  PAGE
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+html, body { height:100%; background-color: #ffffff;}
+body { margin:0; padding:0; overflow:hidden; }
+
+.scene { 
+  width: 1920px;
+  height: 1080px;
+  border: 1px solid black;
+  position: relative;
+}
+
+#something {
+  position: absolute; top: 200px; left: 200px;
+  background: blue; width: 200px; height: 200px;
+  z-index: 1;
+}
+
+#flash {
+  z-index: 2;
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  xdisplay: none;
+}
+
+
+#scene-a {
+  display: none;
+}
+#scene-b {
+  display: none;
+}
+
+#scene-0 {
+
+}
+

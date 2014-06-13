@@ -1,4 +1,5 @@
-var partsMoveTime = 500;
+var partsLoopTime = 1000,
+    partsMoveTime = 2000;
 
 var clickData = {
   "1": {
@@ -123,14 +124,27 @@ $(document).ready(function() {
 });
 
 
+var animTimeouts = [];
+
+function clearTimeouts() {
+  for (var i = 0; i < animTimeouts.length; i++) {
+    clearTimeout(animTimeouts.pop());
+  }
+}
+
 function onPartClick(e) {
   e.preventDefault();
 
+  clearTimeouts();
+
   var $part = $(this);
 
-  if ($part.hasClass('magnet')) {
-    $part.removeClass('magnet');
+  //if ($part.hasClass('magnet')) {
+  if ($('.magnet').length > 0) {
+    //$part.removeClass('magnet');
+    $('.magnet').removeClass('magnet');
     $body.addClass('animate');
+    $body.removeClass('remove-animation');
 
     for (var i = 1; i <= 5; i++) {
       $("#part-" + i).css({left: "", top: ""});
@@ -138,9 +152,12 @@ function onPartClick(e) {
   } else {
     $part.addClass('magnet');
 
-    setTimeout(function() {
+    animTimeouts.push(setTimeout(function() {
       $body.removeClass('animate');
-    }, partsMoveTime);
+      animTimeouts.push(setTimeout(function() {
+        $body.addClass('remove-animation');
+      }, partsLoopTime/4));
+    }, partsMoveTime*2/3));
 
     var i = $(this).attr("id").replace("part-", "");
     var changeCSS = clickData[i].changeCSS;
@@ -157,3 +174,11 @@ function onPartClick(e) {
 
   return false;
 }
+
+function gotoScene(scene) {
+  for (var i = 0; i <=5; i++) {
+    $body.removeClass('show-scene-' + i);
+  }
+  $body.addClass('show-scene-' + scene);
+}
+

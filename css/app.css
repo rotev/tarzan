@@ -14,10 +14,15 @@
   background: url(../img/parts/Part1_State1.png);
   background-size: contain;
   background-repeat: no-repeat;
-  transition: all 0.5s ease; }
+  transition: all 2s ease;
+  -webkit-animation: part-1-keyframes 1s linear infinite;
+  -webkit-animation-play-state: paused; }
 
 .animate #part-1 {
-  -webkit-animation: part-1-keyframes 1.5s linear infinite; }
+  -webkit-animation-play-state: running; }
+
+.remove-animation #part-1 {
+  -webkit-animation: none; }
 
 @-webkit-keyframes part-1-keyframes {
   0% {
@@ -53,10 +58,15 @@
   background: url(../img/parts/Part2_State1.png);
   background-size: contain;
   background-repeat: no-repeat;
-  transition: all 0.5s ease; }
+  transition: all 2s ease;
+  -webkit-animation: part-2-keyframes 1s linear infinite;
+  -webkit-animation-play-state: paused; }
 
 .animate #part-2 {
-  -webkit-animation: part-2-keyframes 1.5s linear infinite; }
+  -webkit-animation-play-state: running; }
+
+.remove-animation #part-2 {
+  -webkit-animation: none; }
 
 @-webkit-keyframes part-2-keyframes {
   0% {
@@ -92,10 +102,15 @@
   background: url(../img/parts/Part3_State1.png);
   background-size: contain;
   background-repeat: no-repeat;
-  transition: all 0.5s ease; }
+  transition: all 2s ease;
+  -webkit-animation: part-3-keyframes 1s linear infinite;
+  -webkit-animation-play-state: paused; }
 
 .animate #part-3 {
-  -webkit-animation: part-3-keyframes 1.5s linear infinite; }
+  -webkit-animation-play-state: running; }
+
+.remove-animation #part-3 {
+  -webkit-animation: none; }
 
 @-webkit-keyframes part-3-keyframes {
   0% {
@@ -126,15 +141,20 @@
   height: 300px;
   display: inline-block;
   position: absolute;
-  left: 433px;
-  top: 550px;
+  left: 423px;
+  top: 557px;
   background: url(../img/parts/Part4_State1.png);
   background-size: contain;
   background-repeat: no-repeat;
-  transition: all 0.5s ease; }
+  transition: all 2s ease;
+  -webkit-animation: part-4-keyframes 1s linear infinite;
+  -webkit-animation-play-state: paused; }
 
 .animate #part-4 {
-  -webkit-animation: part-4-keyframes 1.5s linear infinite; }
+  -webkit-animation-play-state: running; }
+
+.remove-animation #part-4 {
+  -webkit-animation: none; }
 
 @-webkit-keyframes part-4-keyframes {
   0% {
@@ -170,10 +190,15 @@
   background: url(../img/parts/Part5_State1.png);
   background-size: contain;
   background-repeat: no-repeat;
-  transition: all 0.5s ease; }
+  transition: all 2s ease;
+  -webkit-animation: part-5-keyframes 1s linear infinite;
+  -webkit-animation-play-state: paused; }
 
 .animate #part-5 {
-  -webkit-animation: part-5-keyframes 1.5s linear infinite; }
+  -webkit-animation-play-state: running; }
+
+.remove-animation #part-5 {
+  -webkit-animation: none; }
 
 @-webkit-keyframes part-5-keyframes {
   0% {
@@ -211,11 +236,54 @@ body {
   padding: 0;
   overflow: hidden; }
 
+#window {
+  width: 1920px;
+  height: 1080px;
+  overflow: hidden;
+  position: relative; }
+
+nav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100; }
+
+#scroller {
+  width: 5760px;
+  height: 3240px;
+  overflow: hidden;
+  position: absolute;
+  transition: all 2s ease; }
+
+.show-scene-0 #scroller {
+  left: -1920px;
+  top: -1080px; }
+
+.show-scene-1 #scroller {
+  left: -1920px;
+  top: 0; }
+
+.show-scene-2 #scroller {
+  left: 0;
+  top: -1080px; }
+
+.show-scene-3 #scroller {
+  left: -3840px;
+  top: -1080px; }
+
+.show-scene-4 #scroller {
+  left: 0;
+  top: -2160px; }
+
+.show-scene-5 #scroller {
+  left: -3840px;
+  top: -2160px; }
+
 .scene {
   width: 1920px;
   height: 1080px;
-  border: 1px solid black;
-  position: relative; }
+  position: relative;
+  float: left; }
 
 #something {
   position: absolute;
@@ -240,3 +308,13 @@ body {
 
 #scene-b {
   display: none; }
+
+#scene-0::before {
+  position: absolute;
+  left: 0;
+  top: 746px;
+  content: ' ';
+  width: 1550px;
+  height: 405px;
+  background: url(../img/scene0_bg.png) no-repeat;
+  z-index: 0; }

@@ -4,8 +4,8 @@ var partsLoopTime = 1000,
 var clickData = {
   "1": {
     "stoneCSS": {
-      "left": "1409px",
-      "top": "175px"
+      "left": "1386px",
+      "top": "85px"
     },
     "changeCSS": {
       "2": {
@@ -29,8 +29,8 @@ var clickData = {
 
   "2": {
     "stoneCSS": {
-      "left": "587px",
-      "top": "16px" 
+      "left": "421px",
+      "top": "10px" 
     },
     "changeCSS": {
       "1": {
@@ -54,8 +54,8 @@ var clickData = {
 
   "3": {
     "stoneCSS": {
-      "left": "224px",
-      "top": "100px" 
+      "left": "58px",
+      "top": "96px" 
     },
     "changeCSS": {
       "1": {
@@ -79,8 +79,8 @@ var clickData = {
 
   "4": {
     "stoneCSS": {
-      "left": "538px",
-      "top": "252px" 
+      "left": "373px",
+      "top": "248px" 
     },
     "changeCSS": {
       "1": {
@@ -104,8 +104,8 @@ var clickData = {
 
   "5": {
     "stoneCSS": {
-      "left": "1174px",
-      "top": "354px"
+      "left": "1177px",
+      "top": "346px"
     },
     "changeCSS": {
       "1": {
@@ -142,7 +142,11 @@ $(document).ready(function() {
   $body.addClass('animate');
 
   for (var i = 1; i <= 5; i++) {
-    $("#part-" + i).click(onPartClick);
+    $("#part-" + i).click(onPartClick)
+    $("#part-" + i).on('animationiteration webkitanimationIteration', function(e) {
+      console.log("blah");
+    }).on('animationstart', function() { console.log('blee');})
+      .on('animationend', function() { console.log('blet');});
   }
 
 });
@@ -193,44 +197,47 @@ function partStone(e) {
   return false;
 }
 
+function magnetToPart($part) {
+  var i = $part.attr("id").replace("part-", "");
+
+  $part.addClass('magnet');
+  
+  var changeCSS = clickData[i].changeCSS;
+
+  animTimeouts.push(setTimeout(function() {
+    $body.removeClass('animate');
+
+    animTimeouts.push(setTimeout(function() {
+
+      $body.addClass('remove-animation');
+      animTimeouts.push(setTimeout(function() {
+        showStone(i);
+        hideParts();
+      }, partsLoopTime/4));
+
+    }, partsLoopTime/4));
+
+  }, partsMoveTime - partsLoopTime));
+
+  var $otherPart;
+  for (var otherPart in changeCSS) {
+    $otherPart = $("#part-" + otherPart);
+    $otherPart.removeClass("magnet");
+    $otherPart.css(changeCSS[otherPart]);
+  }
+
+  $part.css({left: "", top: ""});
+}
+
 function onPartClick(e) {
   e.preventDefault();
 
   clearTimeouts();
 
-  var $part = $(this);
-
   if ($('.magnet').length > 0) {
     partStone();
-  } else {
-    $part.addClass('magnet');
-
-    var i = $(this).attr("id").replace("part-", "");
-    var changeCSS = clickData[i].changeCSS;
-
-    animTimeouts.push(setTimeout(function() {
-      $body.removeClass('animate');
-
-      animTimeouts.push(setTimeout(function() {
-
-        $body.addClass('remove-animation');
-        animTimeouts.push(setTimeout(function() {
-          showStone(i);
-          hideParts();
-        }, partsLoopTime/4));
-
-      }, partsLoopTime/4));
-
-    }, partsMoveTime - partsLoopTime));
-
-    var $otherPart;
-    for (var otherPart in changeCSS) {
-      $otherPart = $("#part-" + otherPart);
-      $otherPart.removeClass("magnet");
-      $otherPart.css(changeCSS[otherPart]);
-    }
-
-    $part.css({left: "", top: ""});
+  } else {    
+    magnetToPart($(this));
   }
 
   return false;

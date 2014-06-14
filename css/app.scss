@@ -30,7 +30,10 @@ $stone-height: 1019px;
 $stone-left: 602px;
 $stone-top: 42px;
 
-$zoom-ratio: 0.585;
+$small-stone-width: 417px;
+$small-stone-height: 602px;
+
+//$zoom-ratio: 0.5807799442;
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
   PARTS
@@ -97,6 +100,31 @@ $zoom-ratio: 0.585;
   }  
 }
 
+@mixin stone-keyframes($size) {
+  -webkit-animation: stone-keyframes-#{$size} #{$stone-loop-time}s linear infinite;
+}
+
+@mixin stone-keyframes-def($size) {
+  $stone-state1-url: "../img/stone/Stone1_#{$size}.png";
+  $stone-state2-url: "../img/stone/Stone2_#{$size}.png";
+  $stone-state3-url: "../img/stone/Stone3_#{$size}.png";
+  $stone-state4-url: "../img/stone/Stone4_#{$size}.png";
+
+  @-webkit-keyframes stone-keyframes-#{$size} {
+    0%        { background-image: url($stone-state1-url); }
+    25%       { background-image: url($stone-state1-url); }
+    25.01%    { background-image: url($stone-state2-url); }
+    50%       { background-image: url($stone-state2-url); }
+    50.01%    { background-image: url($stone-state3-url); }
+    75%       { background-image: url($stone-state3-url); }
+    75.01%    { background-image: url($stone-state4-url); }
+    100%      { background-image: url($stone-state4-url); }
+  }  
+}
+
+@include stone-keyframes-def(small);
+@include stone-keyframes-def(big);
+
 #stone {
   width: $stone-width;
   height: $stone-height;
@@ -110,30 +138,19 @@ $zoom-ratio: 0.585;
   background-size: contain;
   background-repeat: no-repeat;
 
-  -webkit-animation: stone-keyframes #{$stone-loop-time}s linear infinite;
+  @include stone-keyframes(big);
 
   &.zoom-out {
-    width: $stone-width * $zoom-ratio;
-    height: $stone-height * $zoom-ratio;    
+    background-image: url(../img/stone/Stone1_small.png);
+
+    // width: $stone-width * $zoom-ratio;
+    // height: $stone-height * $zoom-ratio; 
+    width: $small-stone-width;
+    height: $small-stone-height;
+
+    @include stone-keyframes(small);   
   }
 }
-
-$stone-state1-url: "../img/stone/Stone1_big.png";
-$stone-state2-url: "../img/stone/Stone2_big.png";
-$stone-state3-url: "../img/stone/Stone3_big.png";
-$stone-state4-url: "../img/stone/Stone4_big.png";
-
-@-webkit-keyframes stone-keyframes {
-  0%        { background-image: url($stone-state1-url); }
-  25%       { background-image: url($stone-state1-url); }
-  25.01%    { background-image: url($stone-state2-url); }
-  50%       { background-image: url($stone-state2-url); }
-  50.01%    { background-image: url($stone-state3-url); }
-  75%       { background-image: url($stone-state3-url); }
-  75.01%    { background-image: url($stone-state4-url); }
-  100%      { background-image: url($stone-state4-url); }
-}  
-
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
   PAGE

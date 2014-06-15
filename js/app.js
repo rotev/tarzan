@@ -1,4 +1,4 @@
-var partsLoopTime = 1000,
+var partsLoopTime = 1200,
     partsMoveTime = 2000;
 
 var clickData = {
@@ -142,9 +142,24 @@ $(document).ready(function() {
   $body = $('body');
   $stone = $('#stone');
 
-  $stone.click(partStone).hide();
+  $stone.click(partStone);
 
   $body.addClass('animate');
+  showLogo();
+
+  setTimeout(function() {
+    partStone();
+    $body.removeClass('animate').addClass('remove-animation');
+    $('#scene-0 .wrapper').removeClass('zoom');
+
+    setTimeout(function() {
+      $body.addClass('animate').removeClass('remove-animation');
+    });
+
+    setTimeout(function() {
+      hideLogo();
+    }, 2000);
+  }, 1500);
 
   for (var i = 1; i <= 5; i++) {
     $("#part-" + i).click(onPartClick)
@@ -196,6 +211,19 @@ function showText(i) {
 
 function hideText() {
   $('#text').hide();
+}
+
+function showLogo() {
+  var flashvars = {},
+      params = { wmode: "transparent", allowscriptaccess: "always" },
+      attributes = {};
+
+  //swfobject.embedSWF("swf/Logo_Animation.swf", "logo", "1116", "628", "9.0.0", "swf/expressInstall.swf", flashvars, params, attributes);
+  swfobject.embedSWF("swf/Logo_Animation.swf", "logo", "1920", "1080", "9.0.0", "swf/expressInstall.swf", flashvars, params, attributes);
+}
+
+function hideLogo() {
+  $('#logo').hide();
 }
 
 function partStone(e) {

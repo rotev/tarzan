@@ -18,7 +18,18 @@ $parts-pos: (
         (1420px, 590px)
       );
 
-$parts-loop-time: 1; // without s
+$oox: -680px;
+$ooy: -30px;
+
+$parts-original-pos: (
+        (1550px + $oox, 91px + $ooy),
+        (1409px + $oox, 175px + $ooy),
+        (1419px + $oox, 348px + $ooy),
+        (1436px + $oox, 397px + $ooy),
+        (1629px + $oox, 328px + $ooy)
+      );
+
+$parts-loop-time: 1.2; // without s
 $stone-loop-time: $parts-loop-time;
 $parts-move-time: 2s; // with s
 
@@ -69,11 +80,22 @@ $small-stone-height: 602px;
 
     z-index: 2;
 
+    visibility: hidden;
+
     @include part($i, $width, $height, $x, $y);
 
     -webkit-animation: part-#{$i}-keyframes #{$parts-loop-time}s linear infinite;
     -webkit-animation-play-state: paused;
     //-webkit-animation-delay: #{$i*$parts-loop-time/10}s;
+  }
+
+  .zoom #part-#{$i} {
+    $pos: nth($parts-original-pos, $i);
+    $x: nth($pos, 1);
+    $y: nth($pos, 2);
+
+    left: $x;
+    top: $y;
   }
 
   .animate #part-#{$i} {
@@ -142,18 +164,20 @@ $small-stone-height: 602px;
   background-size: contain;
   background-repeat: no-repeat;
 
-  @include stone-keyframes(big);
-
   &.zoom-out {
-    background-image: url(../img/stone/Stone1_small.png);
+    //background-image: url(../img/stone/Stone1_small.png);
 
     // width: $stone-width * $zoom-ratio;
     // height: $stone-height * $zoom-ratio; 
     width: $small-stone-width;
     height: $small-stone-height;
 
-    @include stone-keyframes(small);   
+    //@include stone-keyframes(small);   
   }
+}
+
+.animate #stone {
+  @include stone-keyframes(big);  
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
@@ -194,6 +218,13 @@ nav {
     position: absolute;
     top: 0; left: 0;
     z-index: 1;
+  }
+
+  #logo {
+    z-index: 200;
+    position: absolute;
+    //top: 21px; left: 260px;
+    top: 0; left: 0;
   }
 }
 
@@ -262,14 +293,30 @@ nav {
 
 #scene-0 {
 
-  &::before {
-    position: absolute;
-    left: 0;
-    top: 746px;
-    content: ' ';
-    width: 1550px; height: 405px;
-    background: url(../img/scene0_bg.png) no-repeat;
-    z-index: 0;
+  .wrapper {
+    width: 100%; height: 100%;
+    transition: all 2s ease;
+    position: relative;
+    top: 0;
+
+    &.zoom {
+      -webkit-transform: scale(1.72);
+      top: 348px;      
+    }
+
+    &::before {
+      position: absolute;
+      left: 0;
+      top: 746px;
+      content: ' ';
+      width: 1550px; height: 405px;
+      background: url(../img/scene0_bg.png) no-repeat;
+      z-index: 0;
+    }
+
+    .part {
+      //display: none;
+    }
   }
 }
 

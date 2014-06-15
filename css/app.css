@@ -6,6 +6,7 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 #part-1 {
   z-index: 2;
+  visibility: hidden;
   width: 243px;
   height: 307px;
   display: inline-block;
@@ -18,8 +19,12 @@
   transition-property: left, top;
   transition-duration: 2s;
   transition-timing-function: ease;
-  -webkit-animation: part-1-keyframes 1s linear infinite;
+  -webkit-animation: part-1-keyframes 1.2s linear infinite;
   -webkit-animation-play-state: paused; }
+
+.zoom #part-1 {
+  left: 870px;
+  top: 61px; }
 
 .animate #part-1 {
   -webkit-animation-play-state: running; }
@@ -53,6 +58,7 @@
     background-image: url("../img/parts/Part1_State4.png"); } }
 #part-2 {
   z-index: 2;
+  visibility: hidden;
   width: 233px;
   height: 263px;
   display: inline-block;
@@ -65,8 +71,12 @@
   transition-property: left, top;
   transition-duration: 2s;
   transition-timing-function: ease;
-  -webkit-animation: part-2-keyframes 1s linear infinite;
+  -webkit-animation: part-2-keyframes 1.2s linear infinite;
   -webkit-animation-play-state: paused; }
+
+.zoom #part-2 {
+  left: 729px;
+  top: 145px; }
 
 .animate #part-2 {
   -webkit-animation-play-state: running; }
@@ -100,6 +110,7 @@
     background-image: url("../img/parts/Part2_State4.png"); } }
 #part-3 {
   z-index: 2;
+  visibility: hidden;
   width: 153px;
   height: 145px;
   display: inline-block;
@@ -112,8 +123,12 @@
   transition-property: left, top;
   transition-duration: 2s;
   transition-timing-function: ease;
-  -webkit-animation: part-3-keyframes 1s linear infinite;
+  -webkit-animation: part-3-keyframes 1.2s linear infinite;
   -webkit-animation-play-state: paused; }
+
+.zoom #part-3 {
+  left: 739px;
+  top: 318px; }
 
 .animate #part-3 {
   -webkit-animation-play-state: running; }
@@ -147,6 +162,7 @@
     background-image: url("../img/parts/Part3_State4.png"); } }
 #part-4 {
   z-index: 2;
+  visibility: hidden;
   width: 337px;
   height: 300px;
   display: inline-block;
@@ -159,8 +175,12 @@
   transition-property: left, top;
   transition-duration: 2s;
   transition-timing-function: ease;
-  -webkit-animation: part-4-keyframes 1s linear infinite;
+  -webkit-animation: part-4-keyframes 1.2s linear infinite;
   -webkit-animation-play-state: paused; }
+
+.zoom #part-4 {
+  left: 756px;
+  top: 367px; }
 
 .animate #part-4 {
   -webkit-animation-play-state: running; }
@@ -194,6 +214,7 @@
     background-image: url("../img/parts/Part4_State4.png"); } }
 #part-5 {
   z-index: 2;
+  visibility: hidden;
   width: 173px;
   height: 185px;
   display: inline-block;
@@ -206,8 +227,12 @@
   transition-property: left, top;
   transition-duration: 2s;
   transition-timing-function: ease;
-  -webkit-animation: part-5-keyframes 1s linear infinite;
+  -webkit-animation: part-5-keyframes 1.2s linear infinite;
   -webkit-animation-play-state: paused; }
+
+.zoom #part-5 {
+  left: 949px;
+  top: 298px; }
 
 .animate #part-5 {
   -webkit-animation-play-state: running; }
@@ -297,13 +322,13 @@
   z-index: 2;
   background: url(../img/stone/Stone1_big.png);
   background-size: contain;
-  background-repeat: no-repeat;
-  -webkit-animation: stone-keyframes-big 1s linear infinite; }
+  background-repeat: no-repeat; }
   #stone.zoom-out {
-    background-image: url(../img/stone/Stone1_small.png);
     width: 417px;
-    height: 602px;
-    -webkit-animation: stone-keyframes-small 1s linear infinite; }
+    height: 602px; }
+
+.animate #stone {
+  -webkit-animation: stone-keyframes-big 1.2s linear infinite; }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
   PAGE
@@ -344,6 +369,11 @@ nav {
   top: 0;
   left: 0;
   z-index: 1; }
+.show-scene-0 #logo {
+  z-index: 200;
+  position: absolute;
+  top: 0;
+  left: 0; }
 
 .show-scene-1 #scroller {
   left: -1920px;
@@ -395,12 +425,21 @@ nav {
 #scene-b {
   display: none; }
 
-#scene-0::before {
-  position: absolute;
-  left: 0;
-  top: 746px;
-  content: ' ';
-  width: 1550px;
-  height: 405px;
-  background: url(../img/scene0_bg.png) no-repeat;
-  z-index: 0; }
+#scene-0 .wrapper {
+  width: 100%;
+  height: 100%;
+  transition: all 2s ease;
+  position: relative;
+  top: 0; }
+  #scene-0 .wrapper.zoom {
+    -webkit-transform: scale(1.72);
+    top: 348px; }
+  #scene-0 .wrapper::before {
+    position: absolute;
+    left: 0;
+    top: 746px;
+    content: ' ';
+    width: 1550px;
+    height: 405px;
+    background: url(../img/scene0_bg.png) no-repeat;
+    z-index: 0; }

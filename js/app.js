@@ -7,6 +7,7 @@ var clickData = {
       "left": "1386px",
       "top": "85px"
     },
+    "textUrl": "swf/Album.swf",
     "changeCSS": {
       "2": {
         "left": "1409px",
@@ -32,6 +33,7 @@ var clickData = {
       "left": "421px",
       "top": "10px" 
     },
+    "textUrl": "swf/Video.swf",
     "changeCSS": {
       "1": {
         "left": "587px",
@@ -57,6 +59,7 @@ var clickData = {
       "left": "58px",
       "top": "96px" 
     },
+    "textUrl": "swf/Shows.swf",
     "changeCSS": {
       "1": {
         "left": "224px",
@@ -82,6 +85,7 @@ var clickData = {
       "left": "373px",
       "top": "248px" 
     },
+    "textUrl": "swf/Critic.swf",
     "changeCSS": {
       "1": {
         "left": "538px",
@@ -107,6 +111,7 @@ var clickData = {
       "left": "1177px",
       "top": "346px"
     },
+    "textUrl": "swf/Face.swf",
     "changeCSS": {
       "1": {
         "left": "1342px",
@@ -179,6 +184,20 @@ function hideStone() {
   $stone.hide();
 }
 
+function showText(i) {
+  var url = clickData[i].textUrl;
+
+  var flashvars = {},
+      params = { wmode: "transparent", allowscriptaccess: "always" },
+      attributes = {};
+
+  swfobject.embedSWF(url, "text", "1920", "1080", "9.0.0", "swf/expressInstall.swf", flashvars, params, attributes);
+}
+
+function hideText() {
+  $('#text').hide();
+}
+
 function partStone(e) {
   if (e) {
     e.preventDefault();
@@ -193,6 +212,7 @@ function partStone(e) {
   }
 
   hideStone();
+  hideText();
 
   return false;
 }
@@ -218,6 +238,8 @@ function magnetToPart($part) {
     }, partsLoopTime/4));
 
   }, partsMoveTime - partsLoopTime));
+  
+  showText(i);
 
   var $otherPart;
   for (var otherPart in changeCSS) {

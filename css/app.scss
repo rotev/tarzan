@@ -67,6 +67,8 @@ $small-stone-height: 602px;
     $x: nth($pos, 1);
     $y: nth($pos, 2);
 
+    z-index: 2;
+
     @include part($i, $width, $height, $x, $y);
 
     -webkit-animation: part-#{$i}-keyframes #{$parts-loop-time}s linear infinite;
@@ -134,6 +136,8 @@ $small-stone-height: 602px;
   left: $stone-left;
   top: $stone-top;
 
+  z-index: 2;
+
   background: url(../img/stone/Stone1_big.png);
   background-size: contain;
   background-repeat: no-repeat;
@@ -184,6 +188,12 @@ nav {
   #scroller {
     left: -$scene-width;
     top: -$scene-height;
+  }
+
+  #text {
+    position: absolute;
+    top: 0; left: 0;
+    z-index: 1;
   }
 }
 

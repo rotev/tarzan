@@ -5,6 +5,7 @@
   PARTS
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 #part-1 {
+  z-index: 2;
   width: 243px;
   height: 307px;
   display: inline-block;
@@ -51,6 +52,7 @@
   100% {
     background-image: url("../img/parts/Part1_State4.png"); } }
 #part-2 {
+  z-index: 2;
   width: 233px;
   height: 263px;
   display: inline-block;
@@ -97,6 +99,7 @@
   100% {
     background-image: url("../img/parts/Part2_State4.png"); } }
 #part-3 {
+  z-index: 2;
   width: 153px;
   height: 145px;
   display: inline-block;
@@ -143,6 +146,7 @@
   100% {
     background-image: url("../img/parts/Part3_State4.png"); } }
 #part-4 {
+  z-index: 2;
   width: 337px;
   height: 300px;
   display: inline-block;
@@ -189,6 +193,7 @@
   100% {
     background-image: url("../img/parts/Part4_State4.png"); } }
 #part-5 {
+  z-index: 2;
   width: 173px;
   height: 185px;
   display: inline-block;
@@ -289,6 +294,7 @@
   position: absolute;
   left: 602px;
   top: 42px;
+  z-index: 2;
   background: url(../img/stone/Stone1_big.png);
   background-size: contain;
   background-repeat: no-repeat;
@@ -333,6 +339,11 @@ nav {
 .show-scene-0 #scroller {
   left: -1920px;
   top: -1080px; }
+.show-scene-0 #text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1; }
 
 .show-scene-1 #scroller {
   left: -1920px;

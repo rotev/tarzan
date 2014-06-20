@@ -346,13 +346,15 @@ body {
   width: 1920px;
   height: 1080px;
   overflow: hidden;
-  position: relative; }
+  position: relative;
+  margin: auto; }
 
 nav {
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 100; }
+  z-index: 100;
+  display: none; }
 
 #scroller {
   width: 5760px;
@@ -364,11 +366,6 @@ nav {
 .show-scene-0 #scroller {
   left: -1920px;
   top: -1080px; }
-.show-scene-0 #text {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 1; }
 .show-scene-0 #logo {
   z-index: 200;
   position: absolute;
@@ -376,70 +373,79 @@ nav {
   left: 0; }
 
 .show-scene-1 #scroller {
-  left: -1920px;
+  left: 0;
   top: 0; }
 
 .show-scene-2 #scroller {
-  left: 0;
-  top: -1080px; }
+  left: -1920px;
+  top: 0; }
 
 .show-scene-3 #scroller {
   left: -3840px;
-  top: -1080px; }
+  top: 0; }
 
 .show-scene-4 #scroller {
-  left: 0;
-  top: -2160px; }
+  left: -3840px;
+  top: -1080px; }
 
 .show-scene-5 #scroller {
   left: -3840px;
   top: -2160px; }
+
+.show-scene-6 #scroller {
+  left: -1920px;
+  top: -2160px; }
+
+.show-scene-7 #scroller {
+  left: 0;
+  top: -2160px; }
+
+.show-scene-8 #scroller {
+  left: 0;
+  top: -1080px; }
 
 .scene {
   width: 1920px;
   height: 1080px;
   position: relative;
   float: left; }
-
-#something {
-  position: absolute;
-  top: 200px;
-  left: 200px;
-  background: blue;
-  width: 200px;
-  height: 200px;
-  z-index: 1; }
-
-#flash {
-  z-index: 2;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  xdisplay: none; }
-
-#scene-a {
-  display: none; }
-
-#scene-b {
-  display: none; }
+  .scene:not(#scene-0) {
+    cursor: pointer; }
 
 #scene-0 .wrapper {
   width: 100%;
   height: 100%;
   transition: all 2s ease;
   position: relative;
-  top: 0; }
+  top: 0;
+  overflow: hidden; }
   #scene-0 .wrapper.zoom {
     -webkit-transform: scale(1.72);
     top: 348px; }
   #scene-0 .wrapper::before {
     position: absolute;
     left: 0;
-    top: 746px;
+    top: 754px;
     content: ' ';
     width: 1550px;
     height: 405px;
     background: url(../img/scene0_bg.png) no-repeat;
-    z-index: 0; }
+    z-index: 2;
+    pointer-events: none; }
+  #scene-0 .wrapper #text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1; }
+
+#scene-3 {
+  background: url(../img/scene3_bg.gif) no-repeat; }
+
+#scene-5 {
+  background: url(../img/scene5_bg.gif) no-repeat; }
+
+#scene-6 {
+  background: url(../img/scene6_bg.gif) no-repeat; }
+
+#scene-7 {
+  background: url(../img/scene7_bg.gif) no-repeat; }

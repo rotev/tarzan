@@ -1,5 +1,6 @@
 var partsLoopTime = 1200,
-    partsMoveTime = 2000;
+    partsMoveTime = 2000,
+    skipWelcomeScreen = true;
 
 var clickData = {
   "1": {
@@ -7,7 +8,8 @@ var clickData = {
       "left": "1386px",
       "top": "85px"
     },
-    "textUrl": "swf/Album.swf",
+    "textUrl": "swf/Face.swf",
+    "scene": 7,
     "changeCSS": {
       "2": {
         "left": "1409px",
@@ -33,7 +35,7 @@ var clickData = {
       "left": "421px",
       "top": "10px" 
     },
-    "textUrl": "swf/Video.swf",
+    "textUrl": "swf/Album.swf",
     "changeCSS": {
       "1": {
         "left": "587px",
@@ -111,7 +113,7 @@ var clickData = {
       "left": "1177px",
       "top": "346px"
     },
-    "textUrl": "swf/Face.swf",
+    "textUrl": "swf/Video.swf",
     "changeCSS": {
       "1": {
         "left": "1342px",
@@ -145,21 +147,30 @@ $(document).ready(function() {
   $stone.click(partStone);
 
   $body.addClass('animate');
-  showLogo();
 
-  setTimeout(function() {
+  $('.scene:not(#scene-0)').click(function() {
+    gotoScene(0);
+  });
+  
+  if (skipWelcomeScreen) {
     partStone();
-    $body.removeClass('animate').addClass('remove-animation');
     $('#scene-0 .wrapper').removeClass('zoom');
-
+  } else {
+    showLogo();
     setTimeout(function() {
-      $body.addClass('animate').removeClass('remove-animation');
-    });
+      partStone();
+      $body.removeClass('animate').addClass('remove-animation');
+      $('#scene-0 .wrapper').removeClass('zoom');
 
-    setTimeout(function() {
-      hideLogo();
-    }, 2000);
-  }, 1500);
+      setTimeout(function() {
+        $body.addClass('animate').removeClass('remove-animation');
+      });
+
+      setTimeout(function() {
+        hideLogo();
+      }, 2000);
+    }, 1500);    
+  }
 
   for (var i = 1; i <= 5; i++) {
     $("#part-" + i).click(onPartClick)
@@ -294,7 +305,7 @@ function onPartClick(e) {
 }
 
 function gotoScene(scene) {
-  for (var i = 0; i <=5; i++) {
+  for (var i = 0; i <=8; i++) {
     $body.removeClass('show-scene-' + i);
   }
   $body.addClass('show-scene-' + scene);

@@ -1,6 +1,6 @@
 var partsLoopTime = 1200,
     partsMoveTime = 2000,
-    skipWelcomeScreen = true;
+    skipWelcomeScreen = false;
 
 var clickData = {
   "1": {
@@ -137,14 +137,12 @@ var clickData = {
 
 var $body,
     $stone;
-
+    enterSite = false;
 
 $(document).ready(function() {
 
   $body = $('body');
   $stone = $('#stone');
-
-  $stone.click(partStone);
 
   $body.addClass('animate');
 
@@ -158,20 +156,32 @@ $(document).ready(function() {
     partStone();
     $('#scene-0 .wrapper').removeClass('zoom');
   } else {
-    showLogo();
-    setTimeout(function() {
-      partStone();
-      $body.removeClass('animate').addClass('remove-animation');
-      $('#scene-0 .wrapper').removeClass('zoom');
+    $stone.click(function(e) {
+      e.preventDefault();
 
-      setTimeout(function() {
-        $body.addClass('animate').removeClass('remove-animation');
-      });
+      if (!enterSite) {
+        enterSite = true;
 
-      setTimeout(function() {
-        hideLogo();
-      }, 2000);
-    }, 1500);    
+        showLogo();
+        setTimeout(function() {
+          $body.removeClass('animate').addClass('remove-animation');
+        }, 1900);
+        setTimeout(function() {
+          partStone();
+          $('#scene-0 .wrapper').removeClass('zoom');
+
+          setTimeout(function() {
+            $body.addClass('animate').removeClass('remove-animation');
+            initScene0();
+          });
+
+          setTimeout(function() {
+            //$('#logo').css('z-index', '1');
+            hideLogo();
+          }, 2000);
+        }, 2100); 
+      }
+    });   
   }
 
   for (var i = 1; i <= 5; i++) {
@@ -191,6 +201,10 @@ function clearTimeouts() {
   for (var i = 0; i < animTimeouts.length; i++) {
     clearTimeout(animTimeouts.pop());
   }
+}
+
+function initScene0() {
+  $stone.click(partStone);
 }
 
 function hideParts() {

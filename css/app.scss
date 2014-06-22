@@ -38,8 +38,8 @@ $scene-height: 1080px;
 
 $stone-width: 718px;
 $stone-height: 1019px;
-$stone-left: 602px;
-$stone-top: 42px;
+$stone-left: 702px;
+$stone-top: 82px;
 
 $small-stone-width: 417px;
 $small-stone-height: 602px;
@@ -78,7 +78,7 @@ $small-stone-height: 602px;
     $x: nth($pos, 1);
     $y: nth($pos, 2);
 
-    z-index: 2;
+    z-index: 3;
 
     visibility: hidden;
 
@@ -362,6 +362,7 @@ nav {
 
 .goto-scene {
   position: absolute;
+  z-index: 2;
 
   &:nth-child(1) {
     height: 70%;

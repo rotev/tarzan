@@ -329,11 +329,19 @@ nav {
 }
 
 #scene-1 {
+  background: url(../img/scene1_bg.png) no-repeat;
+}
 
+#scene-2 {
+  background: url(../img/scene2_bg.gif) no-repeat;
 }
 
 #scene-3 {
   background: url(../img/scene3_bg.gif) no-repeat;
+}
+
+#scene-4 {
+  background: url(../img/scene4_bg.gif) no-repeat;
 }
 
 #scene-5 {
@@ -347,3 +355,37 @@ nav {
 #scene-7 {
   background: url(../img/scene7_bg.gif) no-repeat;
 }
+
+#scene-8 {
+  background: url(../img/scene8_bg.gif) no-repeat;
+}
+
+.goto-scene {
+  position: absolute;
+
+  &:nth-child(1) {
+    height: 70%;
+    width: 100px;
+    left: 0;
+    top: 15%;
+  }
+
+  &:nth-child(2) {
+    height: 70%;
+    width: 100px;
+    right: 0;
+    top: 15%;
+  }
+
+  &:nth-child(3) {
+    width: 70%;
+    height: 100px;
+    top: 0;
+    left: 15%;
+  }
+}
+
+
+
+
+

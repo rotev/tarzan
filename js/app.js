@@ -148,6 +148,8 @@ $(document).ready(function() {
 
   $body.addClass('animate');
 
+  initHotSpots();
+
   $('.scene:not(#scene-0)').click(function() {
     gotoScene(0);
   });
@@ -204,6 +206,8 @@ function showStone(i) {
     $stone.css(css);
     $stone.show();
   }
+
+  $body.addClass('animate');
 }
 
 function hideStone() {
@@ -309,5 +313,22 @@ function gotoScene(scene) {
     $body.removeClass('show-scene-' + i);
   }
   $body.addClass('show-scene-' + scene);
+
+  partStone();
 }
 
+var catchHotspot = false;
+function initHotSpots() {
+  $('.goto-scene').mouseenter(function() {
+    catchHotspot = true;
+    var scene = $(this).attr("rel")
+    setTimeout(function() {
+      if (catchHotspot) {
+        catchHotspot = false;
+        gotoScene(scene);
+      }
+    }, 200);
+  }).mouseout(function() {
+    catchHotspot = false;
+  });
+}

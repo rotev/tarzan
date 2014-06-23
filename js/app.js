@@ -179,6 +179,14 @@ function getImagesToLoad() {
     imagesToLoad.push("img/stone/Stone" + i + "_small.png");
   }
 
+  // backgrounds
+  imagesToLoad.push("img/scene0_bg.png");
+  imagesToLoad.push("img/scene1_bg.png");
+  
+  for (var i = 2; i <= 8; i++) {
+    imagesToLoad.push("img/scene" + i + "_bg.gif");
+  }
+
   return imagesToLoad;
 }
 

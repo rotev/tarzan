@@ -144,7 +144,58 @@ $(document).ready(function() {
   $body = $('body');
   $stone = $('#stone');
 
-  $body.addClass('animate');
+  $body.addClass('loading');
+
+  preload().done(init);
+
+});
+
+function preload(options) {
+
+  var allDone = $.Deferred(),
+      imagesToLoad = getImagesToLoad(),
+      totalImagesLoaded = 0;
+
+  var deferreds = imagesToLoad.map(loadImage);
+
+  $.when.apply($, deferreds).then(allDone.resolve);
+
+  return allDone;
+}
+
+function getImagesToLoad() {
+  var imagesToLoad = [];
+
+  // parts
+  for (var i = 1; i <= 5; i++) {
+    for (var j = 1; j <= 4; j++) {
+      imagesToLoad.push("img/parts/Part" + i + "_State" + j + ".png");
+    }
+  }
+
+  return imagesToLoad;
+}
+
+function loadImage(url) {
+  var deferred = $.Deferred(),
+      img = new Image();
+
+  img.onload = deferred.resolve.bind(deferred, img);
+  img.onerror = deferred.resolve;
+
+  deferred.fail(function() {
+    img.src = "";
+  });
+
+  // start loading the image
+  img.src = url;
+
+  return deferred;  
+}
+
+function init() { 
+
+  $body.removeClass('loading').addClass('animate');
 
   initHotSpots();
 
@@ -176,8 +227,8 @@ $(document).ready(function() {
           });
 
           setTimeout(function() {
-            //$('#logo').css('z-index', '1');
-            hideLogo();
+            $('#logo').css('z-index', '2');
+            //hideLogo();
           }, 2000);
         }, 2100); 
       }
@@ -191,8 +242,7 @@ $(document).ready(function() {
     }).on('animationstart', function() { console.log('blee');})
       .on('animationend', function() { console.log('blet');});
   }
-
-});
+}
 
 
 var animTimeouts = [];
@@ -328,7 +378,9 @@ function gotoScene(scene) {
   }
   $body.addClass('show-scene-' + scene);
 
-  partStone();
+  setTimeout(function() {
+    partStone();
+  }, 500);
 }
 
 var catchHotspot = false;

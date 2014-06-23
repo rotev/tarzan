@@ -173,6 +173,13 @@ function getImagesToLoad() {
     }
   }
 
+  // stone
+  for (var i = 1; i <= 4; i++) {
+    imagesToLoad.push("img/stone/Stone1_" + i + ".png");
+  }
+
+  imagesToLoad.push("img/stone/Stone1_big.png");
+
   return imagesToLoad;
 }
 

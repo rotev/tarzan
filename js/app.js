@@ -171,6 +171,7 @@ function getImagesToLoad() {
     for (var j = 1; j <= 4; j++) {
       imagesToLoad.push("img/parts/Part" + i + "_State" + j + ".png");
     }
+    imagesToLoad.push("img/parts/Part" + i + ".gif");
   }
 
   // stone
@@ -181,7 +182,7 @@ function getImagesToLoad() {
 
   // backgrounds
   imagesToLoad.push("img/scene0_bg.png");
-  imagesToLoad.push("img/scene1_bg.png");
+  imagesToLoad.push("img/scene1_bg.jpg");
   
   for (var i = 2; i <= 8; i++) {
     imagesToLoad.push("img/scene" + i + "_bg.gif");
@@ -213,7 +214,8 @@ function init() {
 
   initHotSpots();
 
-  $('.scene:not(#scene-0)').click(function() {
+  $('.scene:not(#scene-0) .back').click(function(e) {
+    e.preventDefault();
     gotoScene(0);
   });
   
@@ -228,9 +230,7 @@ function init() {
         enterSite = true;
 
         showLogo();
-        setTimeout(function() {
-          $body.removeClass('animate').addClass('remove-animation');
-        }, 1900);
+
         setTimeout(function() {
           partStone();
           $('#scene-0 .wrapper').removeClass('zoom');
@@ -242,6 +242,7 @@ function init() {
 
           setTimeout(function() {
             $('#logo').css('z-index', '2');
+            onWelcomeAnimationDone();
             //hideLogo();
           }, 2000);
         }, 2100); 
@@ -250,12 +251,19 @@ function init() {
   }
 
   for (var i = 1; i <= 5; i++) {
-    $("#part-" + i).click(onPartClick)
-    $("#part-" + i).on('animationiteration webkitanimationIteration', function(e) {
-      console.log("blah");
-    }).on('animationstart', function() { console.log('blee');})
-      .on('animationend', function() { console.log('blet');});
+    $("#part-" + i).click(onPartClick);
   }
+}
+
+function onWelcomeAnimationDone() {
+  $body.addClass('loaded');
+
+  setInterval(function() {
+    $('#indicators').css('opacity', 1);
+    setTimeout(function() {
+      $('#indicators').css('opacity', 0);
+    }, 600);
+  }, 2000);
 }
 
 
@@ -307,11 +315,11 @@ function hideText() {
 }
 
 function showLogo() {
+  //$('#logo').html('<video autoplay><source src="swf/Website_Animation_Final.mp4" type="video/mp4"></video>');
   var flashvars = {},
       params = { wmode: "transparent", allowscriptaccess: "always" },
       attributes = {};
 
-  //swfobject.embedSWF("swf/Logo_Animation.swf", "logo", "1116", "628", "9.0.0", "swf/expressInstall.swf", flashvars, params, attributes);
   swfobject.embedSWF("swf/Logo_Animation.swf", "logo", "1920", "1080", "9.0.0", "swf/expressInstall.swf", flashvars, params, attributes);
 }
 

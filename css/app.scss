@@ -44,6 +44,8 @@ $stone-top: 82px;
 $small-stone-width: 417px;
 $small-stone-height: 602px;
 
+$animate-with-css: false;
+
 //$zoom-ratio: 0.5807799442;
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
@@ -84,9 +86,11 @@ $small-stone-height: 602px;
 
     @include part($i, $width, $height, $x, $y);
 
-    -webkit-animation: part-#{$i}-keyframes #{$parts-loop-time}s linear infinite;
-    -webkit-animation-play-state: paused;
-    //-webkit-animation-delay: #{$i*$parts-loop-time/10}s;
+    @if $animate-with-css {
+      -webkit-animation: part-#{$i}-keyframes #{$parts-loop-time}s linear infinite;
+      -webkit-animation-play-state: paused;
+      //-webkit-animation-delay: #{$i*$parts-loop-time/10}s;
+    }
   }
 
   .zoom #part-#{$i} {
@@ -99,12 +103,20 @@ $small-stone-height: 602px;
   }
 
   .animate #part-#{$i} {
-    -webkit-animation-play-state: running;
-    //animation-iteration-count: infinite;
+    @if $animate-with-css {
+      -webkit-animation-play-state: running;
+      //animation-iteration-count: infinite;       
+    } @else {     
+      background-image: url(../img/parts/Part#{$i}.gif);  
+    }
   }
 
   .remove-animation #part-#{$i} {
-    -webkit-animation: none;
+    @if $animate-with-css {
+      -webkit-animation: none;
+    } @else {
+      background-image: url(../img/parts/Part#{$i}_State1.png);        
+    }
   }
 
   $state1-url: "../img/parts/Part#{$i}_State1.png";
@@ -146,8 +158,10 @@ $small-stone-height: 602px;
   }  
 }
 
-@include stone-keyframes-def(small);
-@include stone-keyframes-def(big);
+@if $animate-with-css {
+  @include stone-keyframes-def(small);
+  @include stone-keyframes-def(big);
+}
 
 #stone {
   width: $stone-width;
@@ -192,7 +206,11 @@ $small-stone-height: 602px;
 }
 
 .animate #stone {
-  @include stone-keyframes(big);  
+  @if $animate-with-css {
+    @include stone-keyframes(big);
+  } @else {
+    background-image: url(../img/stone/Stone_Full_Small.gif);
+  }
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
@@ -295,7 +313,16 @@ nav {
   float: left;
 
   &:not(#scene-0) {
-    cursor: pointer;
+    //cursor: pointer;
+  }
+}
+
+.loaded #scene-0 {
+  #indicators {
+    //opacity: 1;
+  }
+  #hot-spots {
+    display: block;
   }
 }
 
@@ -308,12 +335,33 @@ nav {
     top: 0; left: 0;
   }
 
+  #hot-spots { 
+    z-index: 6; 
+    position: absolute;
+    height: 0;
+    width: 100%;
+    top: 0;
+    left: 0;
+    display: none;
+  }
+
+  #indicators {
+    position: absolute;
+    z-index: 1;
+    top: 0; left: 0; 
+    width: 100%; height: 100%;
+    background: url(../img/indicator.png) no-repeat;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+  }
+
   .wrapper {
     width: 100%; height: 100%;
     transition: all 2s ease;
     position: relative;
     top: 0;
     overflow: hidden;
+    z-index: 5;
 
     &.zoom {
       -webkit-transform: scale(1.72);
@@ -344,35 +392,104 @@ nav {
 }
 
 #scene-1 {
-  background: url(../img/scene1_bg.png) no-repeat;
+  background: url(../img/scene1_bg.jpg) no-repeat;
+
+  .back {
+    position: absolute;
+    bottom: 0;
+    right: 30px;
+    width: 200px;
+    height: 200px;
+  }
 }
 
 #scene-2 {
   background: url(../img/scene2_bg.gif) no-repeat;
+
+  .goto-scene {
+    position: absolute;
+    z-index: 2;
+    height: 100px;
+    width: 70%;
+    bottom: 0;
+    left: 15%;
+    top: auto;
+  }
 }
 
 #scene-3 {
   background: url(../img/scene3_bg.gif) no-repeat;
+
+  .back {
+    position: absolute;
+    top: 870px;
+    left: 50px;
+    width: 200px;
+    height: 200px;
+  }
 }
 
 #scene-4 {
   background: url(../img/scene4_bg.gif) no-repeat;
+
+  .goto-scene {
+    position: absolute;
+    z-index: 2;
+    height: 70%;
+    width: 100px;
+    top: 15%;
+    left: 0;
+  }
 }
 
 #scene-5 {
   background: url(../img/scene5_bg.gif) no-repeat;
+
+  .back {
+    position: absolute;
+    top: 0;
+    left: 30px;
+    width: 200px;
+    height: 200px;
+  }
 }
 
 #scene-6 {
   background: url(../img/scene6_bg.gif) no-repeat;
+
+  .back {
+    position: absolute;
+    top: 0;
+    left: 850px;
+    width: 200px;
+    height: 200px;
+  }
 }
 
 #scene-7 {
   background: url(../img/scene7_bg.gif) no-repeat;
+
+  .back {
+    position: absolute;
+    top: 0;
+    right: 30px;
+    width: 200px;
+    height: 200px;
+  }
 }
 
 #scene-8 {
   background: url(../img/scene8_bg.gif) no-repeat;
+
+  .goto-scene {
+    position: absolute;
+    z-index: 2;
+    height: 70%;
+    width: 100px;
+    top: 15%;
+    right: 0;
+    left: auto;
+  }
 }
 
 .goto-scene {
@@ -380,14 +497,14 @@ nav {
   z-index: 2;
 
   &:nth-child(1) {
-    height: 70%;
+    height: 756px;
     width: 100px;
     left: 0;
     top: 15%;
   }
 
   &:nth-child(2) {
-    height: 70%;
+    height: 756px;
     width: 100px;
     right: 0;
     top: 15%;

@@ -238,6 +238,8 @@ function init() {
           setTimeout(function() {
             $body.addClass('animate').removeClass('remove-animation');
             initScene0();
+            $('#logo').hide();
+            $('#logo-static').show();
           });
 
           setTimeout(function() {

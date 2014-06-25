@@ -324,6 +324,14 @@ nav {
   #hot-spots {
     display: block;
   }
+
+  #logo-static {
+    display: block;
+  }
+
+  #logo {
+    display: none;
+  }
 }
 
 #scene-0 {
@@ -333,6 +341,16 @@ nav {
     position: absolute;
     //top: 21px; left: 260px;
     top: 0; left: 0;
+  }
+
+  #logo-static {
+    width: 271px; height: 51px;
+    background: url(../img/Logo.png) no-repeat;
+    position: absolute;
+    top: 510px;
+    left: 825px;
+    z-index: 2;
+    display: none;
   }
 
   #hot-spots { 

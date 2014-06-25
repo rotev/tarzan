@@ -360,12 +360,23 @@ nav {
 
 .loaded #scene-0 #hot-spots {
   display: block; }
+.loaded #scene-0 #logo-static {
+  display: block; }
 
 #scene-0 #logo {
   z-index: 200;
   position: absolute;
   top: 0;
   left: 0; }
+#scene-0 #logo-static {
+  width: 271px;
+  height: 51px;
+  background: url(../img/Logo.png) no-repeat;
+  position: absolute;
+  top: 510px;
+  left: 825px;
+  z-index: 2;
+  display: none; }
 #scene-0 #hot-spots {
   z-index: 6;
   position: absolute;

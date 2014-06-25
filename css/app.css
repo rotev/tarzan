@@ -21,8 +21,8 @@
   transition-timing-function: ease; }
 
 .zoom #part-1 {
-  left: 870px;
-  top: 61px; }
+  left: 924px;
+  top: 0px; }
 
 .animate #part-1 {
   background-image: url(../img/parts/Part1.gif); }
@@ -71,8 +71,8 @@
   transition-timing-function: ease; }
 
 .zoom #part-2 {
-  left: 729px;
-  top: 145px; }
+  left: 783px;
+  top: 84px; }
 
 .animate #part-2 {
   background-image: url(../img/parts/Part2.gif); }
@@ -121,8 +121,8 @@
   transition-timing-function: ease; }
 
 .zoom #part-3 {
-  left: 739px;
-  top: 318px; }
+  left: 793px;
+  top: 257px; }
 
 .animate #part-3 {
   background-image: url(../img/parts/Part3.gif); }
@@ -171,8 +171,8 @@
   transition-timing-function: ease; }
 
 .zoom #part-4 {
-  left: 756px;
-  top: 367px; }
+  left: 810px;
+  top: 306px; }
 
 .animate #part-4 {
   background-image: url(../img/parts/Part4.gif); }
@@ -221,8 +221,8 @@
   transition-timing-function: ease; }
 
 .zoom #part-5 {
-  left: 949px;
-  top: 298px; }
+  left: 1003px;
+  top: 237px; }
 
 .animate #part-5 {
   background-image: url(../img/parts/Part5.gif); }
@@ -259,8 +259,8 @@
   height: 1019px;
   display: inline-block;
   position: absolute;
-  left: 702px;
-  top: 82px;
+  left: 760px;
+  top: 0;
   z-index: 5;
   background: url(../img/stone/Stone1_big.png);
   background-size: contain;
@@ -393,7 +393,7 @@ nav {
   overflow: hidden;
   z-index: 5; }
   #scene-0 .wrapper.zoom {
-    -webkit-transform: scale(1.72);
+    -webkit-transform: scale(1.45);
     top: 348px; }
   #scene-0 .wrapper::before {
     position: absolute;

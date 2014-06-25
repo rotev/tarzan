@@ -18,8 +18,8 @@ $parts-pos: (
         (1420px, 590px)
       );
 
-$oox: -680px;
-$ooy: -30px;
+$oox: -626px;
+$ooy: -91px;
 
 $parts-original-pos: (
         (1550px + $oox, 91px + $ooy),
@@ -38,8 +38,8 @@ $scene-height: 1080px;
 
 $stone-width: 718px;
 $stone-height: 1019px;
-$stone-left: 702px;
-$stone-top: 82px;
+$stone-left: 760px;
+$stone-top: 0;
 
 $small-stone-width: 417px;
 $small-stone-height: 602px;
@@ -364,7 +364,7 @@ nav {
     z-index: 5;
 
     &.zoom {
-      -webkit-transform: scale(1.72);
+      -webkit-transform: scale(1.45);
       top: 348px;      
     }
 
